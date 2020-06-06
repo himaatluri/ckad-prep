@@ -4,4 +4,4 @@ RUN echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] http://packages.c
 
 ADD app.py .
 
-RUN python app.py
+RUN python app.py 
