@@ -1,10 +1,12 @@
 provider "google" {
-  version = "~> 3.23"
+  version = "~> 3.28"
 
   project = "gcp-kubernetes-278403"
   region  = "us-east1"
   zone    = "us-east1-b"
 }
+
+data "google_client_config" "current" {}
 
 resource "google_project_service" "cloudbuild_service" {
   project = "gcp-kubernetes-278403"
@@ -19,6 +21,10 @@ resource "google_container_cluster" "mycluster" {
   min_master_version       = "1.14.10-gke.36"
   remove_default_node_pool = true
   initial_node_count       = 1
+
+  workload_identity_config {
+    identity_namespace = "${data.google_client_config.current.project}.svc.id.goog"
+  }
 
   master_authorized_networks_config {
     cidr_blocks {
