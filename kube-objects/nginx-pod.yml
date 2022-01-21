@@ -8,5 +8,6 @@ spec:
   containers:
     - name: myapp
       image: nginx
+
     - name: backend-redis
       image: redis:latest
