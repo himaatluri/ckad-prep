@@ -1,0 +1,14 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: job-test
+spec:
+  completions: 2
+  parallelism: 4
+  template:
+    spec:
+      containers:
+        - name: web
+          image: nginx:latest
+      restartPolicy: Never
+  backOffLimit: 2
